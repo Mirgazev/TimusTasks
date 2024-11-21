@@ -1,0 +1,38 @@
+def bubblesort(arr):
+    k = 0
+    n = len(arr)
+    while True:
+        c = 0
+        for i in range(n - 1 - k):
+            j = n - i - 1
+            if arr[j] < arr[j - 1]:
+                arr[j], arr[j - 1] = arr[j - 1], arr[j]
+                c += 1
+        if not c:
+            break
+        k += 1
+    return arr
+
+
+N1 = int(input())
+First = list(map(int, input().split()))
+N2 = int(input())
+Second = list(map(int, input().split()))
+N3 = int(input())
+Third = list(map(int, input().split()))
+
+First.extend(Second)
+First.extend(Third)
+Base = sorted(First)
+
+K,res = 0,0
+for i in range(N1+N2+N3-1):
+    if Base[i] == Base[i+1]:
+        K += 1
+    else:
+        K = 0
+    if K == 2:
+        res += 1
+        K = 0
+        
+print(res)

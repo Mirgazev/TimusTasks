@@ -1,0 +1,12 @@
+n = int(input())
+guests = 2
+for i in range(n):
+    name = input()
+    if len(name.split("+")) == 2:
+        guests += 2
+    else: 
+        guests += 1
+if guests == 13:
+    print(14*100)
+else:
+    print(guests*100)

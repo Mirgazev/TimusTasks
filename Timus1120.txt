@@ -1,0 +1,15 @@
+import math
+
+N = int(input())
+
+Mul = 2*N
+for a in range(int(math.sqrt(Mul)), 0, -1):
+    first = a * (a - 1)
+    if Mul <= first:
+        continue
+    first = Mul - first
+    if first % (2*a):
+        continue
+    
+    print(first // (2*a), a)
+    break

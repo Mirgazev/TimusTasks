@@ -1,0 +1,16 @@
+import math
+NR = input().split()
+N = int(NR[0])
+R = float(NR[1])
+x = []
+y = []
+length = 2 * math.pi * R
+for i in range(N):
+    coords = list(map(float, input().split()))
+    x.append(coords[0])
+    y.append(coords[1])
+if N>1:
+    for i in range(N-1):
+        length += math.sqrt((x[i+1]-x[i])**2+(y[i+1]-y[i])**2)
+    length += math.sqrt((x[0] - x[N-1]) ** 2 + (y[0] - y[N-1]) ** 2)
+print(length)

@@ -1,0 +1,17 @@
+def Conference(nums):
+    res = 1
+    dp = nums[0][1]
+    for i in range(len(rep)):
+        if nums[i][0] > dp:
+            dp = nums[i][1]
+            res += 1 
+    return res
+
+rep = []
+N = int(input())
+for i in range(N):
+    rep.append(list(map(int, input().split())))
+    
+rep.sort(key=lambda i: (i[1], i[0]))  
+
+print(Conference(rep))

@@ -1,0 +1,75 @@
+class Vec:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f"Vec({self.x}, {self.y})"
+
+class Node:
+    def __init__(self, p=None, s=None, v=None):
+        self.p = p or [0, 0]
+        self.s = s or [0, 0]
+        self.v = v
+
+    def __repr__(self):
+        return f"Node(p={self.p}, s={self.s}, v={self.v})"
+
+def vec_add(v1, v2):
+    return Vec(v1.x + v2.x, v1.y + v2.y)
+
+def vec_neg(v):
+    return Vec(-v.x, -v.y)
+
+def l2(v):
+    return v.x * v.x + v.y * v.y
+
+def merge(L, p, s, nodes, m):
+    k = max(1, p - 3)
+    for i in range(1, 3):
+        for a in range(2):
+            for b in range(2):
+                x = vec_neg(nodes[s[k]].v) if a else nodes[s[k]].v
+                y = vec_neg(nodes[s[k+1]].v) if b else nodes[s[k+1]].v
+                w = vec_add(x, y)
+                if l2(w) <= (2 * L * L if p == 3 else L * L):
+                    nd = Node([s[k], s[k+1]], [a, b], w)
+                    nodes[m].p = nd.p
+                    nodes[m].s = nd.s
+                    nodes[m].v = nd.v
+                    s[k] = m
+                    m += 1
+                    s[k+1] = s[k+2]
+                    p -= 1
+                    return m, p
+        s[k], s[p-i] = s[p-i], s[k]
+    return m, p
+
+def output(s, nodes, out):
+    v = [(s[1], False)]
+    while v:
+        p, b = v.pop()
+        n = nodes[p]
+        if not n.p[0]:
+            out[p] = '-' if b else '+'
+        else:
+            v.append((n.p[0], b ^ n.s[0]))
+            v.append((n.p[1], b ^ n.s[1]))
+
+def main():
+    n = int(input())
+    L = int(input())
+    m = p = n + 1
+    nodes = [Node(v=Vec(0, 0)) for _ in range(2 * n + 1)]
+    s = [i for i in range(2 * n + 1)]
+    out = [''] * (n + 1)
+    for i in range(1, n + 1):
+        x, y = map(int, input().split())
+        nodes[i].v = Vec(x, y)
+    while p > 2:
+        m, p = merge(L, p, s, nodes, m)
+    output(s, nodes, out)
+    print("YES")
+    print(''.join(out[1:]))
+
+main()

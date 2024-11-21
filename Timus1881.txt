@@ -1,0 +1,19 @@
+h, w , n = map(int,input().split())
+words = []
+size = w
+Str = 1
+page = 1
+for i in range(n):
+    words.append(input())
+    if size + len(words[i]) < w:
+        size += len(words[i]) + 1
+    elif size + len(words[i]) == w:
+        size += len(words[i])
+    else:
+        if Str > h:
+            Str = 1
+            page += 1
+        Str += 1
+        size = len(words[i]) + 1
+        
+print(page)

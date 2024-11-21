@@ -1,0 +1,20 @@
+n = int(input())
+if n <= 4:
+    l = "few"
+elif n <= 9:
+    l = "several"
+elif n <= 19:
+    l = "pack"
+elif n <= 49:
+    l = "lots"
+elif n <= 99:
+    l = "horde"
+elif n <= 249:
+    l = "throng"
+elif n <= 499:
+    l = "swarm"
+elif n <= 999:
+    l = "zounds"
+else:
+    l = "legion"
+print(l)

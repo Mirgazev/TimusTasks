@@ -1,0 +1,5 @@
+NM = input().split()
+if (int(NM[0]) <= int(NM[1])):
+    print(int(NM[0])*2 - 2)
+else: 
+    print(int(NM[1])*2 - 1)

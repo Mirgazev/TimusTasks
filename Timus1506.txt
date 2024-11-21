@@ -1,0 +1,19 @@
+#1506
+import math
+NK = input().split()
+numbers = list(map(int, input().split()))
+rows = math.ceil(int(NK[0]) / int(NK[1]))
+arr = [[' ']*int(NK[1]) for _ in range(rows)]
+i, j = 0, 0
+
+for number in numbers:
+    arr[i][j] = number
+    i += 1
+    if i == rows:
+        i = 0
+        j += 1
+        
+for row in arr:
+    for number in row:
+        print(f'{number:4}', end='')
+    print()

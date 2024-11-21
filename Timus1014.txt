@@ -1,0 +1,16 @@
+N = int(input())
+if N == 0:
+    print(10)
+elif N == 1:
+    print(1)
+else:
+    nums = []
+    for i in range(9, 1, -1):
+        while N % i == 0:
+            nums.append(i)
+            N //= i
+    if N != 1:
+        print(-1)
+    else:
+        nums.sort()
+        print(*nums, sep='')

@@ -1,0 +1,3 @@
+#1264
+MN = input().split()
+print(int(MN[0]) * (int(MN[1]) + 1))

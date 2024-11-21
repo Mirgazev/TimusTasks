@@ -1,0 +1,90 @@
+from math import acos, pi
+class Point:
+    '''
+    We represent a point in three-dimensional space.
+    This class has methods for performing operations on points: 
+    addition, subtraction, multiplication by scalar, length calculation and normalization.
+    '''
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def add(self, v):
+        return Point(self.x + v.x, self.y + v.y, self.z + v.z)
+
+    def sub(self, v):
+        return Point(self.x - v.x, self.y - v.y, self.z - v.z)
+
+    def mul(self, k):
+        return Point(k * self.x, k * self.y, k * self.z)
+
+    def len(self):
+        return (self.x ** 2 + self.y ** 2 + self.z ** 2) ** 0.5
+
+    def norm(self, new_len):
+        return self.mul(new_len / self.len())
+
+    def __str__(self):
+        return f"{self.x} {self.y} {self.z}"
+
+
+class Line:
+    '''
+    We represent a line in three-dimensional space.
+    The class has a get_nearest method that returns the closest point on the line to the origin.
+    '''
+    def __init__(self, p1, p2):
+        self.p1 = p1
+        self.p2 = p2
+        self.u = p2.x - p1.x
+        self.v = p2.y - p1.y
+        self.w = p2.z - p1.z
+
+    def get_nearest(self):
+        t = -(self.u * self.p1.x + self.v * self.p1.y + self.w * self.p1.z) / (self.u ** 2 + self.v ** 2 + self.w ** 2)
+        return Point(self.u * t + self.p1.x, self.v * t + self.p1.y, self.w * t + self.p1.z)
+
+    
+def dist(p1, p2):
+    return ((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2 + (p2[2] - p1[2]) ** 2) ** 0.5
+
+def mul(p1, p2):
+    return p1[0] * p2[0] + p1[1] * p2[1] + p1[2] * p2[2]
+
+def vec(p1, p2):
+    return [p1[1] * p2[2] - p1[2] * p2[1], p1[2] * p2[0] - p1[0] * p2[2], p1[0] * p2[1] - p1[1] * p2[0]]
+
+def get_angle(p1, p0, p2):
+    a = [p1[i] - p0[i] for i in range(3)]
+    b = [p2[i] - p0[i] for i in range(3)]
+    return acos(max(-1.0, min(1.0, mul(a, b) / dist(p0, p1) / dist(p0, p2))))
+
+
+
+
+a, b = map(float, input().split())
+x1, y1, z1 = map(float, input().split())
+x2, y2, z2 = map(float, input().split())
+p1 = Point(x1, y1, z1)
+p2 = Point(x2, y2, z2)
+rail = Line(p1, p2)
+M = rail.get_nearest()
+l = M.len()
+EPS = 1e-7
+E = None
+angle = None
+
+if a * a + b * b < l * l + EPS and a + b > l - EPS:
+    N = vec([p1.x, p1.y, p1.z], [p2.x, p2.y, p2.z])
+    x = (a * a - b * b + l * l) / (2 * l)
+    h = (max(0.0, a * a - x * x)) ** 0.5
+
+    H = M.norm(x)
+    E = H.add(Point(*N).norm(h))
+    angle = get_angle([0.0, 0.0, 0.0], [E.x, E.y, E.z], [M.x, M.y, M.z])
+
+if E is None:
+    print("No solution.")
+else:
+    print(str(E) + " " + str(angle))

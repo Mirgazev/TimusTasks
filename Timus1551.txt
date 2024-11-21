@@ -1,0 +1,37 @@
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        left = [x for x in arr[1:] if x < pivot]
+        right = [x for x in arr[1:] if x >= pivot]
+    return quicksort(left) + [pivot] + quicksort(right)
+
+N = int(input())
+All = 2**N
+K = 0
+Max = 0
+Prefect = []
+for i in range(All):
+    Sumo = input().split()
+    Prefect.append(Sumo[1])
+
+Prefect = quicksort(Prefect)
+
+for i in range(All - 1):
+    if Prefect[i] != Prefect[i + 1]:
+        K = 0
+    else:
+        K += 1
+    Max = max(Max, K)
+
+if Max >= All:
+    print(N)
+else:
+    for i in range(N):
+        All //= 2
+        if Max >= All:
+            print(i)
+            break
+    else:
+        print(N)

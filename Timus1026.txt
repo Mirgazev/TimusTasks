@@ -1,0 +1,42 @@
+def countingSortForRadix(inputArray, placeValue):
+    countDict = {i: 0 for i in range(10)}
+    inputSize = len(inputArray)
+    for i in range(inputSize): 
+        placeElement = (inputArray[i] // placeValue) % 10
+        countDict[placeElement] += 1
+
+    for i in range(1, 10):
+        countDict[i] += countDict[i-1]
+        
+    outputArray = [0] * inputSize
+    i = inputSize - 1
+    while i >= 0:
+        currentEl = inputArray[i]
+        placeElement = (inputArray[i] // placeValue) % 10
+        countDict[placeElement] -= 1
+        newPosition = countDict[placeElement]
+        outputArray[newPosition] = currentEl
+        i -= 1
+    return outputArray
+
+def radixSort(inputArray):
+    maxEl = max(inputArray)
+    D = 1
+    while maxEl > 0:
+        maxEl //= 10
+        D += 1
+    placeVal = 1
+    outputArray = inputArray
+    while D > 0:
+        outputArray = countingSortForRadix(outputArray, placeVal)
+        placeVal *= 10  
+        D -= 1
+    return outputArray
+
+N = int(input())
+Base = [int(input()) for _ in range(N)]
+Base = radixSort(Base)
+ok = input()
+request = int(input())
+for i in range(request):
+    print(Base[int(input())-1])

@@ -1,0 +1,37 @@
+N,M = map(int, input().split())
+Nums = []
+nums = []
+ten = 0
+   
+for i in range(N):
+    Nums.append(input())
+    
+if M > N:
+    loop = M - (M // N) * N
+    for i in range(N):
+        if ten == 10:
+            break
+        if i >= loop:
+            nums.append(Nums[i])
+            ten += 1
+    for i in range(loop):
+        if ten == 10:
+            break
+        nums.append(Nums[i])
+        ten += 1
+else:
+    for i in range(N):
+        if ten == 10:
+            break
+        if i >= M:
+            nums.append(Nums[i])
+            ten += 1
+    for i in range(M):
+        if ten == 10:
+            break
+        nums.append(Nums[i])
+        ten += 1
+        
+
+    
+print(''.join(nums))

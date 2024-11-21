@@ -1,0 +1,7 @@
+nk = input().split()
+if (int(nk[0]) <= int(nk[1])):
+    print(2)
+elif ((int(nk[0]) * 2) % int(nk[1]) == 0):
+    print(int((int(nk[0]) * 2) / int(nk[1])))
+else:
+    print(int(((int(nk[0]) * 2) / int(nk[1])) + 1))

@@ -1,0 +1,6 @@
+gold, die, nalog = map(int, input().split())
+years = 0;
+while gold > die:
+    gold -= (gold * nalog)/100
+    years += 1
+print(years)

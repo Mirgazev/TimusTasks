@@ -1,0 +1,9 @@
+N = int(input())
+kak=0
+if (N<=0):
+    for i in range(N,2):
+        kak += i
+else:
+    for i in range(1,N+1):
+        kak += i
+print(kak)

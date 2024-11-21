@@ -1,0 +1,20 @@
+def Meets(L, T, vA, vB, n, feedings):
+    T2=T
+    for i in range(len(feedings)):
+        if feedings[i][0] - 1:
+            T2 -= feedings[i][2]
+        else:
+            T -= feedings[i][2]
+    distanceA = vA * T
+    distanceB = vB *  T2
+    res = int((distanceA + distanceB)/L)
+    return res
+       
+L, T, vA, vB = map(int, input().split())
+n = int(input())
+feedings = []
+for i in range(n):
+    t, start, duration = map(int, input().split())
+    feedings.append((t, start, duration))
+
+print(Meets(L, T, vA, vB, n, feedings))

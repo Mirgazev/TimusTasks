@@ -1,0 +1,4 @@
+inp = input()
+mas = inp.split()
+s2 = int(mas[0])*int(mas[1])*int(mas[2])*2
+print(s2)

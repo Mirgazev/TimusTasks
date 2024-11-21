@@ -1,0 +1,8 @@
+k, n = map(int, input().split())
+a = input().split()
+stopper = 0
+for i in range(n):
+    stopper = (stopper + int(a[i])) - k
+    if stopper < 0:
+        stopper = 0
+print(stopper)

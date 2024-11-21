@@ -1,0 +1,5 @@
+inp = input()
+a = inp.split()
+res1 = int(a[1]) - 1
+res2 = int(a[0]) - 1
+print(res1,res2)

@@ -1,0 +1,36 @@
+#First var(dropal na 12 teste)
+N,M = map(int, input().split())
+Delnumber = []
+Nums = []
+for i in range(M):
+    DL = input().split()
+    Deldoor = 0
+    
+    if DL[0] == 'L':
+        for i in range(len(Delnumber)):
+            if int(DL[1]) >= (Delnumber[i] - (len(Delnumber)- (i+1))) :
+                Deldoor += 1
+        if (int(DL[1])+Deldoor) >= N:
+            Nums.append(N)
+        else:
+            Nums.append(int(DL[1])+Deldoor)
+            
+    if DL[0] == 'D':
+        Delnumber.append(int(DL[1]))
+for i in range(len(Nums)):
+    print(Nums[i])
+
+#Second var drop na teste 9
+N,M = map(int, input().split())
+Delnumber = 0
+Deldoor = 0
+for i in range(M):
+    DL = input().split()
+    if DL[0] == 'L':
+        if int(DL[1]) >= Delnumber:
+            print(int(DL[1])+Deldoor)
+        else:
+            print(int(DL[1]))
+    if DL[0] == 'D':
+        Deldoor += 1
+        Delnumber = int(DL[1])

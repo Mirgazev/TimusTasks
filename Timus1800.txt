@@ -1,0 +1,11 @@
+import math
+LHW = input().split()
+if (int(LHW[0])/200) < (int(LHW[1])/100):
+    time = math.sqrt(2 * (int(LHW[1]) / 100 - int(LHW[0]) / 200) / 9.81)
+    angle = (int(LHW[2]) / 60) * time
+    if 0.25 < angle % 1 < 0.75:
+        print("bread")
+    else:
+        print("butter")
+else:
+    print("butter")

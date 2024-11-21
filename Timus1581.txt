@@ -1,0 +1,14 @@
+#1581
+N = int(input())
+nums = list(map(int, input().split()))
+k = 1
+nums2 = []
+nums.append(0)
+for i in range(len(nums) - 1):
+    if nums[i] == nums[i+1]:
+        k += 1
+    else:
+        nums2.append(k)
+        nums2.append(nums[i])
+        k = 1
+print(*nums2)

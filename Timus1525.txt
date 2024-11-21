@@ -1,0 +1,48 @@
+def number_of_positions(n,m,k,row):
+    size = len(row)
+    sumM = sumN = sumK = 0
+    maxM = maxN = maxK = 0
+    minM = minN = minK = 0
+    for i in range(size):
+        if row[i] == 'u':
+            sumM += 1
+            if sumM >= maxM:
+                maxM = sumM
+        elif row[i] == 'd':
+            sumM -= 1
+            if sumM <= minM:
+                minM = sumM
+        elif row[i] == 'l':
+            sumN += 1
+            if sumN >= maxN:
+                maxN = sumN
+        elif row[i] == 'r':
+            sumN -= 1
+            if sumN <= minN:
+                minN = sumN
+        elif row[i] == 'f':
+            sumK += 1
+            if sumK >= maxK:
+                maxK = sumK
+        elif row[i] == 'b':
+            sumK -= 1
+            if sumK <= minK:
+                minK = sumK
+    if m - maxM + minM <= 1:
+        m = 1
+    else:
+        m = m - maxM + minM
+    if n - maxN + minN <= 1:
+        n = 1
+    else:
+        n = n - maxN + minN
+    if k - maxK + minK <= 1:
+        k = 1
+    else:
+        k = k - maxK + minK
+    return m,n,k
+        
+n, m, k = map(int, input().split())
+row = input().strip()
+m,n,k = number_of_positions(n, m, k, row)
+print(n * m * k)

@@ -1,0 +1,21 @@
+def GnomSort(arr, n, i=0):
+    while i < n:
+        if i == 0:
+            i += 1 
+        elif arr[i-1] <= arr[i]:
+            i += 1
+        else:
+            arr[i], arr[i-1] = arr[i-1], arr[i]
+            if i > 0:
+                i -= 1
+            else:
+                i += 1
+    return Group
+                
+K = int(input())
+Group = list(map(int, input().split()))
+res = 0
+Group = GnomSort(Group, K)
+for i in range((K//2) + 1):
+    res += (Group[i] // 2) + 1
+print(res)

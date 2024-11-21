@@ -1,0 +1,17 @@
+def count(arr):
+    factor = 0
+    total = 0
+    for i in range(N):
+        if arr[i] == 1:
+            factor += 1
+        elif arr[i] == 0:
+            total += factor
+    return total
+
+N = int(input())
+start_stroka = input()
+while len(start_stroka) != N:
+    start_stroka += input()
+stroka = [1 if s == '>' else 0 for s in start_stroka]
+res = count(stroka)
+print (res)

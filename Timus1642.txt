@@ -1,0 +1,45 @@
+n,x = map(int, input().split())
+wall = list(map(int, input().split()))
+wall.sort()
+pwall = []
+mwall = []
+for i in range(n):
+    if wall[i] > 0:
+        pwall.append(wall[i])
+    else:
+        mwall.append(wall[i])
+distance1 = 0
+distance2 = 0  
+
+#Туда
+if len(pwall) == 0:
+    if x > 0:
+        distance1 = x
+    elif x < 0:
+        distance1 = -1
+elif pwall[0] > x > 0:
+    distance1 = x
+elif pwall[0] > 0:
+    if x<0 and len(mwall) == 0:
+        distance1 = 2*pwall[0] + abs(x)
+    elif mwall[len(mwall)-1] < x < 0:
+        distance1 = 2*pwall[0] + abs(x)
+    else: 
+        distance1 = -1 
+else:
+    distance1 = -1
+    
+if distance1 == -1:
+    print('Impossible')
+else:
+    if len(mwall) == 0:
+        if x < 0:
+            distance2 = abs(x)
+    elif mwall[len(mwall)-1] < x < 0:
+        distance2 = abs(x)
+    elif mwall[len(mwall)-1] < 0:
+        if x>0 and len(pwall) == 0:
+            distance2 = -2*mwall[len(mwall)-1] + x
+        elif pwall[0] > x > 0:
+            distance2 = -2*mwall[len(mwall)-1] + x
+    print(distance1,distance2)

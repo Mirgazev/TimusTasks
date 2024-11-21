@@ -1,0 +1,10 @@
+Size = int(input())
+nums = 0 
+Max = 0
+for i in range(Size):
+    nums += int(input())
+    if nums >= Max:
+        Max = nums
+    if nums < 0:
+        nums = 0
+print(Max)
